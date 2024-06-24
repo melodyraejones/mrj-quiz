@@ -1,0 +1,38 @@
+.quiz-question {
+  font-weight: 300;
+  font-size: 3.6rem;
+  padding: 0;
+  margin: 0 0 25px;
+  overflow-wrap: break-word;
+  text-align: center;
+  color: #6a9c07;
+}
+@media (max-width: 64em) {
+  .quiz-question {
+    font-size: 3rem;
+    padding: 0 2rem;
+  }
+  .btn-choice {
+    width: 60%;
+  }
+  button.btn {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 44em) {
+  .btn-choice {
+    width: 95%;
+  }
+}
+@media (max-width: 33.75em) {
+  .btn-choice {
+    width: 95%;
+  }
+  .quiz-question {
+    font-size: 2rem;
+  }
+  button.btn {
+    font-size: 1.2rem;
+  }
+}

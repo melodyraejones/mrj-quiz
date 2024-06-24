@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.quiz-frontend {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+header,
+footer {
+  flex-shrink: 0;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  padding: 2rem;
+  background-color: aqua;
+}
+
+@media (max-width: 60em) {
+  .start-screen-btn {
+    width: 20%;
+  }
+}
+@media (max-width: 53em) {
+  .start-screen-img {
+  }
+}
+@media (max-width: 43em) {
+}
+@media (max-width: 33em) {
+}

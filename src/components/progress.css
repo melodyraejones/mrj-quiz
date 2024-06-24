@@ -1,0 +1,51 @@
+.progress {
+  margin-bottom: 4rem;
+  display: grid;
+  justify-content: center;
+  gap: 1.2rem;
+  grid-template-columns: auto auto;
+  font-size: 1.8rem;
+  color: #000;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 90%; /* Control width here */
+  height: 20px; /* Adjust height to make it thicker */
+  grid-column: 1 / -1;
+  border-radius: 10px;
+  overflow: hidden; /* Ensures the border-radius applies correctly */
+  background-color: #f0f0f0; /* Light background for the progress bar */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0; /* Same as the regular background */
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-image: linear-gradient(
+    135deg,
+    #4caf50 0%,
+    #8bc34a 50%,
+    #cddc39 100%
+  ); /* Green gradient effect */
+  border-radius: 10px;
+  transition: width 0.4s ease; /* Smooth transition for bar width */
+}
+
+progress::-moz-progress-bar {
+  background-color: #4caf50;
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .progress {
+    font-size: 1.4rem;
+  }
+}

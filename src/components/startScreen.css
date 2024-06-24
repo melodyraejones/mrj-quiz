@@ -1,0 +1,112 @@
+.quiz-start-heading {
+  text-align: center;
+  font-weight: 300;
+  font-size: 4rem;
+  margin: 0 0 25px;
+  padding: 0 25px;
+  overflow-wrap: break-word;
+  color: #562973;
+  margin-top: 1.4rem;
+}
+
+.start-screen-img {
+  width: 80%; /* Adjusted width for better control */
+  max-width: 600px; /* Maximum width to ensure it doesn't get too large */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  margin: 20px auto; /* Added top and bottom margin */
+  border: 1px solid #dfd3e4;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #444;
+}
+
+.start-screen-text {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 800px;
+}
+.start-screen-questions-length {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 800px;
+  background-color: #6434823d;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.start-screen-btn {
+  font-size: 1.2rem;
+  margin-top: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  padding: 1.4rem 1.6rem;
+  width: 10%;
+  background-color: rgb(52, 1, 110);
+  border-radius: 1rem;
+}
+.start-screen-btn {
+  background-color: rgb(47, 1, 99);
+}
+.instructions {
+  text-align: left;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 64em) {
+  .quiz-start-heading {
+    font-size: 3.6rem;
+  }
+  .start-screen-btn {
+    width: 20%;
+  }
+}
+@media (max-width: 60em) {
+  .start-screen-img {
+    max-width: 400px;
+  }
+  .quiz-start-heading {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 53em) {
+  .start-screen-btn {
+    width: 25%;
+  }
+  .start-screen-img {
+    max-width: 350px;
+  }
+  .quiz-start-heading {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 33.75em) {
+  img.start-screen-img {
+    max-width: 300px;
+    width: 75%;
+  }
+  .start-screen-btn {
+    width: 35%;
+  }
+}
+@media (max-width: 20em) {
+  img.start-screen-img {
+    max-width: 200px;
+  }
+  .start-screen-text {
+    font-size: 1.2rem;
+  }
+  .start-screen-btn {
+    width: 60%;
+  }
+}
