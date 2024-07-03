@@ -2,6 +2,51 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/MultiLineInput.js":
+/*!*******************************!*\
+  !*** ./src/MultiLineInput.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const MultiLineInput = ({
+  label,
+  value,
+  onChange,
+  help
+}) => {
+  const [inputValue, setInputValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(value.join("\n"));
+  const handleChange = event => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    const newValuesArray = newValue.split("\n").map(v => v.trim()).filter(v => v);
+    onChange(newValuesArray);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: label,
+    help: help
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
+    value: inputValue,
+    onChange: handleChange,
+    rows: 10,
+    cols: 50,
+    className: "components-textarea-control__input"
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MultiLineInput);
+
+/***/ }),
+
 /***/ "./src/index.css":
 /*!***********************!*\
   !*** ./src/index.css ***!
@@ -21,6 +66,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
@@ -113,8 +168,6 @@ module.exports = window["wp"]["element"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
@@ -126,11 +179,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _MultiLineInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MultiLineInput */ "./src/MultiLineInput.js");
 
 
 
 
-wp.blocks.registerBlockType("mrjplugin/quiz", {
+
+
+const personalityTypes = typeof mrjplugin_data !== "undefined" && Array.isArray(mrjplugin_data.personality_types) ? mrjplugin_data.personality_types.map(type => ({
+  label: type,
+  value: type
+})) : [];
+console.log("Personality Types:", personalityTypes);
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.registerBlockType)("mrjplugin/quiz", {
   title: "What's Your Wisdom Profile?",
   icon: "smiley",
   category: "common",
@@ -146,6 +209,10 @@ wp.blocks.registerBlockType("mrjplugin/quiz", {
         }],
         imageUrl: ""
       }]
+    },
+    personalityTypes: {
+      type: "array",
+      default: []
     }
   },
   edit: EditComponent,
@@ -158,7 +225,8 @@ function EditComponent({
   setAttributes
 }) {
   const {
-    questions
+    questions,
+    personalityTypes
   } = attributes;
   function addQuestion() {
     const newQuestions = [...questions, {
@@ -227,9 +295,19 @@ function EditComponent({
       questions: newQuestions
     });
   }
+  function updatePersonalityTypes(newTypes) {
+    setAttributes({
+      personalityTypes: newTypes
+    });
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mrj-quiz-edit-block"
-  }, questions.map((question, questionIndex) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_MultiLineInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: "Personality Types",
+    help: "Enter personality types, one per line.",
+    value: personalityTypes,
+    onChange: updatePersonalityTypes
+  }), questions.map((question, questionIndex) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: questionIndex
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     value: question.question,
@@ -253,10 +331,14 @@ function EditComponent({
     value: choice.text,
     onChange: newText => updateChoiceText(questionIndex, choiceIndex, newText),
     label: "Choice Text"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: "Personality Type",
     value: choice.personalityType,
-    onChange: newType => updatePersonalityType(questionIndex, choiceIndex, newType),
-    label: "Personality Type"
+    options: personalityTypes.map(type => ({
+      label: type,
+      value: type
+    })),
+    onChange: newType => updatePersonalityType(questionIndex, choiceIndex, newType)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     onSelect: media => onSelectChoiceImage(media, questionIndex, choiceIndex),
     allowedTypes: ["image"],
@@ -283,8 +365,6 @@ function EditComponent({
     isPrimary: true
   }, "Add Question"));
 }
-})();
-
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

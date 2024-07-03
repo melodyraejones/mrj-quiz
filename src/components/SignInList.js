@@ -29,13 +29,6 @@ const SignInList = () => {
           className="ctct-inline-form"
           data-form-id="9d74ea33-1e45-4cee-8de7-2fd103a68ba7"
         ></div>
-
-        <a
-          href="https://melodyraejones.local/the-expand-your-wisdom-offer/"
-          className="get-toolkit-btn"
-        >
-          Get the Toolkit Access at the Special Price
-        </a>
       </div>
     </div>
   );

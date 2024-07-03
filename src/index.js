@@ -1,16 +1,28 @@
 import "./index.css";
 import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-
 import {
   TextControl,
   Flex,
   FlexBlock,
   FlexItem,
   Button,
-  Icon,
+  SelectControl,
 } from "@wordpress/components";
+import { registerBlockType } from "@wordpress/blocks";
+import MultiLineInput from "./MultiLineInput";
 
-wp.blocks.registerBlockType("mrjplugin/quiz", {
+const personalityTypes =
+  typeof mrjplugin_data !== "undefined" &&
+  Array.isArray(mrjplugin_data.personality_types)
+    ? mrjplugin_data.personality_types.map((type) => ({
+        label: type,
+        value: type,
+      }))
+    : [];
+
+console.log("Personality Types:", personalityTypes);
+
+registerBlockType("mrjplugin/quiz", {
   title: "What's Your Wisdom Profile?",
   icon: "smiley",
   category: "common",
@@ -31,6 +43,10 @@ wp.blocks.registerBlockType("mrjplugin/quiz", {
         },
       ],
     },
+    personalityTypes: {
+      type: "array",
+      default: [],
+    },
   },
   edit: EditComponent,
   save: function () {
@@ -39,7 +55,7 @@ wp.blocks.registerBlockType("mrjplugin/quiz", {
 });
 
 function EditComponent({ attributes, setAttributes }) {
-  const { questions } = attributes;
+  const { questions, personalityTypes } = attributes;
 
   function addQuestion() {
     const newQuestions = [
@@ -101,8 +117,18 @@ function EditComponent({ attributes, setAttributes }) {
     setAttributes({ questions: newQuestions });
   }
 
+  function updatePersonalityTypes(newTypes) {
+    setAttributes({ personalityTypes: newTypes });
+  }
+
   return (
     <div className="mrj-quiz-edit-block">
+      <MultiLineInput
+        label="Personality Types"
+        help="Enter personality types, one per line."
+        value={personalityTypes}
+        onChange={updatePersonalityTypes}
+      />
       {questions.map((question, questionIndex) => (
         <div key={questionIndex}>
           <TextControl
@@ -137,12 +163,16 @@ function EditComponent({ attributes, setAttributes }) {
                   }
                   label="Choice Text"
                 />
-                <TextControl
+                <SelectControl
+                  label="Personality Type"
                   value={choice.personalityType}
+                  options={personalityTypes.map((type) => ({
+                    label: type,
+                    value: type,
+                  }))}
                   onChange={(newType) =>
                     updatePersonalityType(questionIndex, choiceIndex, newType)
                   }
-                  label="Personality Type"
                 />
                 <MediaUploadCheck>
                   <MediaUpload

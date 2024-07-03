@@ -15,6 +15,11 @@ body {
   border: 1px solid #d6d6d6;
   background-color: #f1f1f1;
 }
+
+textarea {
+  white-space: pre-wrap; /* Ensures that line breaks are respected */
+}
+
 .mrj-quiz-edit-block .question-label {
   font-size: 20px;
 }

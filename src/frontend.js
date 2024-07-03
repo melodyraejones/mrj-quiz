@@ -18,19 +18,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const initialState = {
+const initializeScores = (personalityTypes) => {
+  const scores = {};
+  personalityTypes.forEach((type) => {
+    scores[type] = 0;
+  });
+  return scores;
+};
+
+const initialState = (personalityTypes) => ({
   status: "ready",
   index: 0,
-  scores: {
-    Communicator: 0,
-    Prophetic: 0,
-    Visionary: 0,
-    EmotionalIntuitive: 0,
-    PhysicalIntuitive: 0,
-  },
+  scores: initializeScores(personalityTypes),
   answer: null,
   questions: [],
-};
+});
 
 function reducer(state, action) {
   switch (action.type) {
@@ -43,6 +45,7 @@ function reducer(state, action) {
       const newScores = { ...state.scores };
       if (personalityType in newScores) {
         newScores[personalityType] += 1; // Increment the score for the corresponding personality type
+        console.log(`Incremented score for ${personalityType}:`, newScores);
       }
       const nextIndex =
         state.index + 1 < state.questions.length
@@ -70,7 +73,7 @@ function reducer(state, action) {
 
 function Quiz(props) {
   const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
+    ...initialState(props.personalityTypes),
     questions: props.questions,
   });
 
@@ -104,7 +107,10 @@ function Quiz(props) {
           </>
         )}
         {state.index === state.questions.length && (
-          <FinishScreen scores={state.scores} />
+          <FinishScreen
+            scores={state.scores}
+            personalityTypes={props.personalityTypes}
+          />
         )}
       </main>
     </div>
