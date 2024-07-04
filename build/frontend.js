@@ -30,7 +30,7 @@ function DynamicPersonalityResult({
   const [content, setContent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
+    const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce
     });

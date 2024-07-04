@@ -20,11 +20,9 @@ class MRJQuiz {
     }
     
     function adminAssets() {
-        // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
         wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
 
-        // Register block type with style and script
         register_block_type('mrjplugin/quiz', array(
             'editor_script' => 'newBlockType',
             'editor_style' => 'quizEditCSS',
@@ -37,7 +35,8 @@ class MRJQuiz {
         wp_enqueue_style('attentionFrontendStyles', plugin_dir_url(__FILE__) . 'build/frontend.css', array(), '1.0');
         wp_localize_script('attentionFrontend', 'appData', array(
             'imagesUrl' => plugin_dir_url(__FILE__) . 'images/',
-            'nonce' => wp_create_nonce('wp_rest')
+            'nonce' => wp_create_nonce('wp_rest'),
+            'siteUrl' => get_site_url()
         ));
     }
     

@@ -8,7 +8,7 @@ function DynamicPersonalityResult({ personalityType }) {
 
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
+    const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
