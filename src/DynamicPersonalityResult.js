@@ -6,11 +6,15 @@ import SignInList from "./components/SignInList";
 function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
 
-  console.log("debugging");
+  console.log(
+    "Debug: Component rendered with personalityType:",
+    personalityType
+  );
+
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
     const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
-    console.log("API URL:", apiUrl); // Debug
+    console.log("Debug: API URL constructed:", apiUrl);
 
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
@@ -18,22 +22,22 @@ function DynamicPersonalityResult({ personalityType }) {
 
     fetch(apiUrl, { headers })
       .then((response) => {
-        console.log("API Response Status:", response.status); // Debug
+        console.log("Debug: API Response Status:", response.status);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("API Data:", data); // Debug
+        console.log("Debug: API Data received:", data);
         if (data) {
           setContent(data);
         } else {
-          console.error("No data found for personality type:", slug);
+          console.error("Debug: No data found for personality type:", slug);
         }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Debug: Error fetching data:", error);
       });
 
     const getRandomColor = () => {
@@ -67,9 +71,11 @@ function DynamicPersonalityResult({ personalityType }) {
   }, [personalityType]);
 
   if (!content) {
+    console.log("Debug: Content is null, loading...");
     return <div>Loading...</div>;
   }
 
+  console.log("Debug: Content found, rendering...");
   const featuredImageUrl = content.featured_media_url || "";
 
   const addClassesToParagraphs = (htmlString) => {
