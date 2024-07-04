@@ -35,7 +35,8 @@ function DynamicPersonalityResult({
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
     console.log("Personality Type Slug:", slug); // Debug log
 
-    const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type/${slug}`;
+    const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
+    console.log("API URL:", apiUrl); // Debug log
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce
     });
@@ -47,8 +48,8 @@ function DynamicPersonalityResult({
       }
       return response.json();
     }).then(data => {
-      if (data) {
-        setContent(data);
+      if (data && data.length > 0) {
+        setContent(data[0]); // Access the first element
       } else {
         console.error("No data found for personality type:", slug);
       }
