@@ -19,7 +19,7 @@ class MRJQuiz {
         add_action('init', array($this, 'create_personality_post_type'));
         add_action('rest_api_init', array($this, 'register_custom_routes'));
     }
-    
+
     function adminAssets() {
         // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
@@ -42,7 +42,7 @@ class MRJQuiz {
             'siteUrl' => get_site_url()
         ));
     }
-    
+
     function theHTML($attributes) {
         ob_start(); ?>
         <div class="quiz-update"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div>
@@ -91,7 +91,7 @@ class MRJQuiz {
     function enqueue_block_editor_assets() {
         $personality_types = get_option('mrjplugin_personality_types', '');
         $personality_types_array = array_map('trim', explode("\n", $personality_types));
-        $personality_types_array = array_filter($personality_types_array); // Remove any empty values
+        $personality_types_array = array_filter($personality_types_array);
         wp_localize_script('newBlockType', 'mrjplugin_data', array(
             'personality_types' => $personality_types_array
         ));
@@ -125,13 +125,19 @@ class MRJQuiz {
         $slug = sanitize_text_field($data['slug']);
         $query_args = array(
             'post_type' => 'personality_type',
-            'name' => $slug,
+            'meta_query' => array(
+                array(
+                    'key' => '_wp_old_slug',
+                    'value' => $slug,
+                    'compare' => '='
+                )
+            ),
             'post_status' => 'publish'
         );
         $query = new WP_Query($query_args);
-    
+
         error_log('Query Args: ' . print_r($query_args, true)); // Debugging query arguments
-    
+
         if ($query->have_posts()) {
             $posts = $query->posts;
             $post = $posts[0];
@@ -142,9 +148,9 @@ class MRJQuiz {
                 'featured_media' => get_post_thumbnail_id($post->ID),
                 'featured_media_url' => get_the_post_thumbnail_url($post->ID, 'full')
             );
-    
+
             error_log('Post found: ' . print_r($response, true)); // Debugging response
-    
+
             return rest_ensure_response($response);
         } else {
             error_log('No post found for slug: ' . $slug); // Debugging no post found
