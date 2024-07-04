@@ -8,7 +8,7 @@ function DynamicPersonalityResult({ personalityType }) {
 
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
+    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
@@ -21,8 +21,8 @@ function DynamicPersonalityResult({ personalityType }) {
         return response.json();
       })
       .then((data) => {
-        if (data.length > 0) {
-          setContent(data[0]);
+        if (data) {
+          setContent(data);
         } else {
           console.error("No data found for personality type:", slug);
         }
@@ -31,13 +31,11 @@ function DynamicPersonalityResult({ personalityType }) {
         console.error("Error fetching data:", error);
       });
 
-    // Function to get a random color
     const getRandomColor = () => {
       const colors = ["#ff6347", "#ffeb3b", "#8bc34a", "#00bcd4", "#e91e63"];
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
-    // Create confetti effect
     const confettiCount = 30;
     const confettiContainer = document.createElement("div");
     confettiContainer.classList.add("confetti-container");
@@ -52,7 +50,6 @@ function DynamicPersonalityResult({ personalityType }) {
 
     document.body.appendChild(confettiContainer);
 
-    // Remove confetti after animation
     setTimeout(() => {
       document.body.removeChild(confettiContainer);
     }, 5000);
@@ -68,32 +65,29 @@ function DynamicPersonalityResult({ personalityType }) {
     return <div>Loading...</div>;
   }
 
-  const featuredImageUrl =
-    content._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
+  const featuredImageUrl = content.featured_media_url || "";
 
-  // Function to add classes to paragraphs
   const addClassesToParagraphs = (htmlString) => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
     const paragraphs = dom.querySelectorAll("p");
 
     paragraphs.forEach((p, index) => {
-      // Add different classes based on index or any other condition
       p.classList.add(`para-${index + 1}`);
     });
 
     return dom.body.innerHTML;
   };
 
-  const modifiedContent = addClassesToParagraphs(content.content.rendered);
+  const modifiedContent = addClassesToParagraphs(content.content);
 
   return (
     <div className="result-personality">
-      <h1 className="personality-title">{content.title.rendered}</h1>
+      <h1 className="personality-title">{content.title}</h1>
       {featuredImageUrl && (
         <img
           className="personality-featured-image"
           src={featuredImageUrl}
-          alt={content.title.rendered}
+          alt={content.title}
         />
       )}
       <div className="personality-content start-screen-text">
