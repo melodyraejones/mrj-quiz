@@ -9,8 +9,6 @@ import Question from "./components/Question";
 import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
 
-import "./frontend.css";
-
 document.addEventListener("DOMContentLoaded", function () {
   const divsToUpdate = document.querySelectorAll(".quiz-update");
   divsToUpdate.forEach(function (div) {
