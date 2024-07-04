@@ -17,12 +17,15 @@ class MRJQuiz {
         add_action('admin_init', array($this, 'settings_init'));
         add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
         add_action('init', array($this, 'create_personality_post_type'));
+        add_action('rest_api_init', array($this, 'register_custom_routes'));
     }
     
     function adminAssets() {
+        // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
         wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
 
+        // Register block type with style and script
         register_block_type('mrjplugin/quiz', array(
             'editor_script' => 'newBlockType',
             'editor_style' => 'quizEditCSS',
@@ -48,27 +51,14 @@ class MRJQuiz {
 
     function add_admin_menu() {
         add_menu_page(
-            'Personality Types',
-            'Personality Types',
-            'manage_options',
-            'mrjplugin_personality_types',
-            array($this, 'settings_page')
+            'Personality Types', // Page title
+            'Personality Types', // Menu title
+            'manage_options', // Capability
+            'edit.php?post_type=personality_type', // Menu slug
+            '', // Function, leave empty as it redirects to post type
+            'dashicons-admin-users', // Icon
+            20 // Position
         );
-    }
-
-    function settings_page() {
-        ?>
-        <div class="wrap">
-            <h1>Personality Types</h1>
-            <form method="post" action="options.php">
-                <?php
-                settings_fields('mrjplugin_settings');
-                do_settings_sections('mrjplugin_settings');
-                submit_button();
-                ?>
-            </form>
-        </div>
-        <?php
     }
 
     function settings_init() {
@@ -120,6 +110,40 @@ class MRJQuiz {
                 'supports'    => array('title', 'editor', 'thumbnail'),
             )
         );
+    }
+
+    function register_custom_routes() {
+        register_rest_route('wp/v2', '/personality_type/(?P<slug>[a-zA-Z0-9-]+)', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'get_personality_type_by_slug'),
+            'permission_callback' => '__return_true'
+        ));
+    }
+
+    function get_personality_type_by_slug($data) {
+        $slug = sanitize_text_field($data['slug']);
+        $query_args = array(
+            'post_type' => 'personality_type',
+            'name' => $slug,
+            'post_status' => 'publish'
+        );
+        $query = new WP_Query($query_args);
+
+        if ($query->have_posts()) {
+            $posts = $query->posts;
+            $post = $posts[0];
+            $response = array(
+                'id' => $post->ID,
+                'title' => $post->post_title,
+                'content' => $post->post_content,
+                'featured_media' => get_post_thumbnail_id($post->ID),
+                'featured_media_url' => get_the_post_thumbnail_url($post->ID, 'full')
+            );
+
+            return rest_ensure_response($response);
+        } else {
+            return new WP_Error('no_post', 'No post found', array('status' => 404));
+        }
     }
 }
 
