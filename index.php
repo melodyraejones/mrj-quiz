@@ -130,6 +130,8 @@ class MRJQuiz {
     }
 
     function get_personality_type_by_slug($data) {
+        error_log('Received API call with slug: ' . $data['slug']); // Debug
+
         $posts = get_posts(array(
             'post_type' => 'personality_type',
             'name' => $data['slug'],
@@ -137,8 +139,11 @@ class MRJQuiz {
         ));
 
         if (empty($posts)) {
+            error_log('No posts found for slug: ' . $data['slug']); // Debug
             return new WP_Error('no_post', 'No post found', array('status' => 404));
         }
+
+        error_log('Post found for slug: ' . $data['slug'] . ' with ID: ' . $posts[0]->ID); // Debug
 
         $response = array(
             'id' => $posts[0]->ID,

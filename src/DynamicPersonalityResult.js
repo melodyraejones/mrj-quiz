@@ -9,18 +9,22 @@ function DynamicPersonalityResult({ personalityType }) {
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
     const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
+    console.log("API URL:", apiUrl); // Debug
+
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
 
     fetch(apiUrl, { headers })
       .then((response) => {
+        console.log("API Response Status:", response.status); // Debug
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
+        console.log("API Data:", data); // Debug
         if (data) {
           setContent(data);
         } else {
