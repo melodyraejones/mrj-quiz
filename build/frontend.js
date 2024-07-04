@@ -28,36 +28,39 @@ function DynamicPersonalityResult({
   personalityType
 }) {
   const [content, setContent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
+    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce
     });
+    console.log("API URL:", apiUrl); // Debug log
+    console.log("Headers:", headers); // Debug log
+
     fetch(apiUrl, {
       headers
     }).then(response => {
+      console.log("API Response Status:", response.status); // Debug log
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error(`Network response was not ok, status: ${response.status}`);
       }
       return response.json();
     }).then(data => {
-      if (data.length > 0) {
-        setContent(data[0]);
+      console.log("API Data:", data); // Debug log
+      if (data) {
+        setContent(data);
       } else {
-        console.error("No data found for personality type:", slug);
+        setError("No data found for the specified personality type.");
       }
     }).catch(error => {
       console.error("Error fetching data:", error);
+      setError(error.message);
     });
-
-    // Function to get a random color
     const getRandomColor = () => {
       const colors = ["#ff6347", "#ffeb3b", "#8bc34a", "#00bcd4", "#e91e63"];
       return colors[Math.floor(Math.random() * colors.length)];
     };
-
-    // Create confetti effect
     const confettiCount = 30;
     const confettiContainer = document.createElement("div");
     confettiContainer.classList.add("confetti-container");
@@ -69,8 +72,6 @@ function DynamicPersonalityResult({
       confettiContainer.appendChild(confetti);
     }
     document.body.appendChild(confettiContainer);
-
-    // Remove confetti after animation
     setTimeout(() => {
       document.body.removeChild(confettiContainer);
     }, 5000);
@@ -80,30 +81,30 @@ function DynamicPersonalityResult({
       }
     };
   }, [personalityType]);
+  if (error) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Error: ", error);
+  }
   if (!content) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Loading...");
   }
-  const featuredImageUrl = content._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
-
-  // Function to add classes to paragraphs
+  const featuredImageUrl = content.featured_media_url || "";
   const addClassesToParagraphs = htmlString => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
     const paragraphs = dom.querySelectorAll("p");
     paragraphs.forEach((p, index) => {
-      // Add different classes based on index or any other condition
       p.classList.add(`para-${index + 1}`);
     });
     return dom.body.innerHTML;
   };
-  const modifiedContent = addClassesToParagraphs(content.content.rendered);
+  const modifiedContent = addClassesToParagraphs(content.content);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "result-personality"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "personality-title"
-  }, content.title.rendered), featuredImageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }, content.title), featuredImageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     className: "personality-featured-image",
     src: featuredImageUrl,
-    alt: content.title.rendered
+    alt: content.title
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "personality-content start-screen-text"
   }, (0,html_react_parser__WEBPACK_IMPORTED_MODULE_2__["default"])(modifiedContent)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_SignInList__WEBPACK_IMPORTED_MODULE_4__["default"], null));
@@ -350,7 +351,7 @@ const SignInList = () => {
     className: "learn-more-title"
   }, "Want to learn more?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "result-para"
-  }, "Enter your email address below and my Discover Your Intuitive Style Report will be sent directly to your inbox. This report will give you more information on how you can create a stronger connection to your intuition. You will also receive information on upcoming events, blog posts, articles, and offerings."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  }, "Enter your email address below and my", " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, "Discover Your Intuitive Style Report"), " will be sent directly to your inbox. This report will give you more information on how you can create a stronger connection to your intuition. You will also receive information on upcoming events, blog posts, articles, and offerings."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "email"
   }, "*Email"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "email",

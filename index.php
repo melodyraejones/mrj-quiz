@@ -126,11 +126,12 @@ class MRJQuiz {
         register_rest_route('wp/v2', '/personality_type/(?P<slug>[a-zA-Z0-9-]+)', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_personality_type_by_slug'),
+            'permission_callback' => '__return_true' // Ensure this allows access
         ));
     }
 
     function get_personality_type_by_slug($data) {
-        error_log('Received API call with slug: ' . $data['slug']); // Debug
+        error_log('Fetching personality type with slug: ' . $data['slug']); // Debug
 
         $posts = get_posts(array(
             'post_type' => 'personality_type',
@@ -139,11 +140,9 @@ class MRJQuiz {
         ));
 
         if (empty($posts)) {
-            error_log('No posts found for slug: ' . $data['slug']); // Debug
+            error_log('No post found for slug: ' . $data['slug']); // Debug
             return new WP_Error('no_post', 'No post found', array('status' => 404));
         }
-
-        error_log('Post found for slug: ' . $data['slug'] . ' with ID: ' . $posts[0]->ID); // Debug
 
         $response = array(
             'id' => $posts[0]->ID,
@@ -152,6 +151,8 @@ class MRJQuiz {
             'featured_media' => get_post_thumbnail_id($posts[0]->ID),
             'featured_media_url' => get_the_post_thumbnail_url($posts[0]->ID, 'full')
         );
+
+        error_log('Post found: ' . print_r($response, true)); // Debug
 
         return rest_ensure_response($response);
     }

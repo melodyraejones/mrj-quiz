@@ -5,40 +5,40 @@ import SignInList from "./components/SignInList";
 
 function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
+  const [error, setError] = useState(null);
 
-  console.log("Debugging started");
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
-    console.log("API URL:", apiUrl); // Debug
+    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
 
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
 
+    console.log("API URL:", apiUrl); // Debug log
+    console.log("Headers:", headers); // Debug log
+
     fetch(apiUrl, { headers })
       .then((response) => {
-        console.log("API Response Status:", response.status); // Debug
-        console.log("API Response Headers:", response.headers); // Debug
+        console.log("API Response Status:", response.status); // Debug log
         if (!response.ok) {
-          console.error(
-            "Network response was not ok, status:",
-            response.status
-          ); // Debug
-          throw new Error("Network response was not ok");
+          throw new Error(
+            `Network response was not ok, status: ${response.status}`
+          );
         }
         return response.json();
       })
       .then((data) => {
-        console.log("API Data:", data); // Debug
-        if (data.length > 0) {
-          setContent(data[0]);
+        console.log("API Data:", data); // Debug log
+        if (data) {
+          setContent(data);
         } else {
-          console.error("No data found for personality type:", slug);
+          setError("No data found for the specified personality type.");
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setError(error.message);
       });
 
     const getRandomColor = () => {
@@ -71,12 +71,15 @@ function DynamicPersonalityResult({ personalityType }) {
     };
   }, [personalityType]);
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   if (!content) {
     return <div>Loading...</div>;
   }
 
-  const featuredImageUrl =
-    content._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
+  const featuredImageUrl = content.featured_media_url || "";
 
   const addClassesToParagraphs = (htmlString) => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
@@ -93,12 +96,12 @@ function DynamicPersonalityResult({ personalityType }) {
 
   return (
     <div className="result-personality">
-      <h1 className="personality-title">{content.title.rendered}</h1>
+      <h1 className="personality-title">{content.title}</h1>
       {featuredImageUrl && (
         <img
           className="personality-featured-image"
           src={featuredImageUrl}
-          alt={content.title.rendered}
+          alt={content.title}
         />
       )}
       <div className="personality-content start-screen-text">
