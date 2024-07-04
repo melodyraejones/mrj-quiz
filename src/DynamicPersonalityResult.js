@@ -6,6 +6,7 @@ import SignInList from "./components/SignInList";
 function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
 
+  console.log("debugging");
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
     const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
