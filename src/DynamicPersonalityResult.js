@@ -5,47 +5,39 @@ import SignInList from "./components/SignInList";
 
 function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    const apiUrl = `https://melodyraejones.com/shop/wp-json/wp/v2/personality_type/${slug}`;
-
+    const apiUrl = `/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
 
-    console.log("API URL:", apiUrl); // Debug log
-    console.log("Headers:", headers); // Debug log
-
     fetch(apiUrl, { headers })
       .then((response) => {
-        console.log("API Response Status:", response.status); // Debug log
         if (!response.ok) {
-          throw new Error(
-            `Network response was not ok, status: ${response.status}`
-          );
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("API Data:", data); // Debug log
-        if (data) {
-          setContent(data);
+        if (data.length > 0) {
+          setContent(data[0]);
         } else {
-          setError("No data found for the specified personality type.");
+          console.error("No data found for personality type:", slug);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        setError(error.message);
       });
 
+    // Function to get a random color
     const getRandomColor = () => {
       const colors = ["#ff6347", "#ffeb3b", "#8bc34a", "#00bcd4", "#e91e63"];
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
+    // Create confetti effect
     const confettiCount = 30;
     const confettiContainer = document.createElement("div");
     confettiContainer.classList.add("confetti-container");
@@ -60,6 +52,7 @@ function DynamicPersonalityResult({ personalityType }) {
 
     document.body.appendChild(confettiContainer);
 
+    // Remove confetti after animation
     setTimeout(() => {
       document.body.removeChild(confettiContainer);
     }, 5000);
@@ -71,37 +64,36 @@ function DynamicPersonalityResult({ personalityType }) {
     };
   }, [personalityType]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   if (!content) {
     return <div>Loading...</div>;
   }
 
-  const featuredImageUrl = content.featured_media_url || "";
+  const featuredImageUrl =
+    content._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
 
+  // Function to add classes to paragraphs
   const addClassesToParagraphs = (htmlString) => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
     const paragraphs = dom.querySelectorAll("p");
 
     paragraphs.forEach((p, index) => {
+      // Add different classes based on index or any other condition
       p.classList.add(`para-${index + 1}`);
     });
 
     return dom.body.innerHTML;
   };
 
-  const modifiedContent = addClassesToParagraphs(content.content);
+  const modifiedContent = addClassesToParagraphs(content.content.rendered);
 
   return (
     <div className="result-personality">
-      <h1 className="personality-title">{content.title}</h1>
+      <h1 className="personality-title">{content.title.rendered}</h1>
       {featuredImageUrl && (
         <img
           className="personality-featured-image"
           src={featuredImageUrl}
-          alt={content.title}
+          alt={content.title.rendered}
         />
       )}
       <div className="personality-content start-screen-text">

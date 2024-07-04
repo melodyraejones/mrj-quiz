@@ -17,13 +17,14 @@ class MRJQuiz {
         add_action('admin_init', array($this, 'settings_init'));
         add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
         add_action('init', array($this, 'create_personality_post_type'));
-        add_action('rest_api_init', array($this, 'register_custom_routes'));
     }
-
+    
     function adminAssets() {
+        // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
         wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
 
+        // Register block type with style and script
         register_block_type('mrjplugin/quiz', array(
             'editor_script' => 'newBlockType',
             'editor_style' => 'quizEditCSS',
@@ -39,7 +40,7 @@ class MRJQuiz {
             'nonce' => wp_create_nonce('wp_rest')
         ));
     }
-
+    
     function theHTML($attributes) {
         ob_start(); ?>
         <div class="quiz-update"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div>
@@ -120,41 +121,6 @@ class MRJQuiz {
                 'supports'    => array('title', 'editor', 'thumbnail'),
             )
         );
-    }
-
-    function register_custom_routes() {
-        register_rest_route('wp/v2', '/personality_type/(?P<slug>[a-zA-Z0-9-]+)', array(
-            'methods' => 'GET',
-            'callback' => array($this, 'get_personality_type_by_slug'),
-            'permission_callback' => '__return_true' // Ensure this allows access
-        ));
-    }
-
-    function get_personality_type_by_slug($data) {
-        error_log('Fetching personality type with slug: ' . $data['slug']); // Debug
-
-        $posts = get_posts(array(
-            'post_type' => 'personality_type',
-            'name' => $data['slug'],
-            'post_status' => 'publish'
-        ));
-
-        if (empty($posts)) {
-            error_log('No post found for slug: ' . $data['slug']); // Debug
-            return new WP_Error('no_post', 'No post found', array('status' => 404));
-        }
-
-        $response = array(
-            'id' => $posts[0]->ID,
-            'title' => $posts[0]->post_title,
-            'content' => $posts[0]->post_content,
-            'featured_media' => get_post_thumbnail_id($posts[0]->ID),
-            'featured_media_url' => get_the_post_thumbnail_url($posts[0]->ID, 'full')
-        );
-
-        error_log('Post found: ' . print_r($response, true)); // Debug
-
-        return rest_ensure_response($response);
     }
 }
 
