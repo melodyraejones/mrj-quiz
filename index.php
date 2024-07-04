@@ -108,6 +108,7 @@ class MRJQuiz {
                 'has_archive' => true,
                 'show_in_rest' => true,
                 'supports'    => array('title', 'editor', 'thumbnail'),
+                'rewrite'     => array('slug' => 'personality_type'),
             )
         );
     }
