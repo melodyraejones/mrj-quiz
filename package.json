@@ -1,7 +1,6 @@
 {
   "name": "mrj-quiz",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "wp-scripts build src/index.js src/frontend.js",
@@ -18,5 +17,6 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^19.2.4"
-  }
+  },
+  "description": ""
 }
