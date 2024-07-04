@@ -128,7 +128,9 @@ class MRJQuiz {
             'post_status' => 'publish'
         );
         $query = new WP_Query($query_args);
-
+    
+        error_log('Query Args: ' . print_r($query_args, true)); // Debugging query arguments
+    
         if ($query->have_posts()) {
             $posts = $query->posts;
             $post = $posts[0];
@@ -139,9 +141,12 @@ class MRJQuiz {
                 'featured_media' => get_post_thumbnail_id($post->ID),
                 'featured_media_url' => get_the_post_thumbnail_url($post->ID, 'full')
             );
-
+    
+            error_log('Post found: ' . print_r($response, true)); // Debugging response
+    
             return rest_ensure_response($response);
         } else {
+            error_log('No post found for slug: ' . $slug); // Debugging no post found
             return new WP_Error('no_post', 'No post found', array('status' => 404));
         }
     }
