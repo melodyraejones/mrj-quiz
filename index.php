@@ -22,7 +22,7 @@ class MRJQuiz {
     function adminAssets() {
         // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
-        wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
+        wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'), filemtime(plugin_dir_path(__FILE__) . 'build/index.js'), true);
 
         // Register block type with style and script
         register_block_type('mrjplugin/quiz', array(
@@ -34,7 +34,7 @@ class MRJQuiz {
 
     function enqueue_frontend_assets() {
         // Debug logging to verify the URLs
-       
+        error_log('Enqueuing frontend assets');
         error_log('Frontend CSS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.css');
         error_log('Frontend JS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.js');
 
