@@ -13,8 +13,9 @@ class MRJQuiz {
     function __construct() {
         add_action('init', array($this, 'adminAssets'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
-        add_action('admin_menu', array($this, 'add_admin_menu'));
-        add_action('admin_init', array($this, 'settings_init'));
+        // Remove the following lines
+        // add_action('admin_menu', array($this, 'add_admin_menu'));
+        // add_action('admin_init', array($this, 'settings_init'));
         add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
         add_action('init', array($this, 'create_personality_post_type'));
     }
@@ -34,7 +35,6 @@ class MRJQuiz {
 
     function enqueue_frontend_assets() {
         // Debug logging to verify the URLs
-       
         error_log('Frontend CSS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.css');
         error_log('Frontend JS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.js');
 
@@ -51,58 +51,6 @@ class MRJQuiz {
         ob_start(); ?>
         <div class="quiz-update"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div>
         <?php return ob_get_clean();
-    }
-
-    function add_admin_menu() {
-        add_menu_page(
-            'Personality Types',
-            'Personality Types',
-            'manage_options',
-            'mrjplugin_personality_types',
-            array($this, 'settings_page')
-        );
-    }
-
-    function settings_page() {
-        ?>
-        <div class="wrap">
-            <h1>Personality Types</h1>
-            <form method="post" action="options.php">
-                <?php
-                settings_fields('mrjplugin_settings');
-                do_settings_sections('mrjplugin_settings');
-                submit_button();
-                ?>
-            </form>
-        </div>
-        <?php
-    }
-
-    function settings_init() {
-        register_setting('mrjplugin_settings', 'mrjplugin_personality_types');
-
-        add_settings_section(
-            'mrjplugin_settings_section',
-            __('Manage Personality Types', 'mrjplugin'),
-            null,
-            'mrjplugin_settings'
-        );
-
-        add_settings_field(
-            'mrjplugin_personality_types',
-            __('Personality Types', 'mrjplugin'),
-            array($this, 'personality_types_render'),
-            'mrjplugin_settings',
-            'mrjplugin_settings_section'
-        );
-    }
-
-    function personality_types_render() {
-        $options = get_option('mrjplugin_personality_types');
-        ?>
-        <textarea name="mrjplugin_personality_types" rows="10" cols="50" class="large-text code"><?php echo isset($options) ? esc_textarea($options) : ''; ?></textarea>
-        <p class="description">Enter personality types, one per line.</p>
-        <?php
     }
 
     function enqueue_block_editor_assets() {
@@ -130,5 +78,6 @@ class MRJQuiz {
         );
     }
 }
+
 
 $mrjQuiz = new MRJQuiz();
