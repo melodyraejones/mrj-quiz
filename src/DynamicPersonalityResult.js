@@ -7,7 +7,6 @@ function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    // Sanitize and convert personalityType to slug format
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
 
     const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
@@ -34,13 +33,11 @@ function DynamicPersonalityResult({ personalityType }) {
         console.error("Error fetching data:", error);
       });
 
-    // Function to get a random color
     const getRandomColor = () => {
       const colors = ["#ff6347", "#ffeb3b", "#8bc34a", "#00bcd4", "#e91e63"];
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
-    // Create confetti effect
     const confettiCount = 30;
     const confettiContainer = document.createElement("div");
     confettiContainer.classList.add("confetti-container");
@@ -55,7 +52,6 @@ function DynamicPersonalityResult({ personalityType }) {
 
     document.body.appendChild(confettiContainer);
 
-    // Remove confetti after animation
     setTimeout(() => {
       document.body.removeChild(confettiContainer);
     }, 5000);
@@ -73,13 +69,11 @@ function DynamicPersonalityResult({ personalityType }) {
 
   const featuredImageUrl = content.featured_media_url || "";
 
-  // Function to add classes to paragraphs
   const addClassesToParagraphs = (htmlString) => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
     const paragraphs = dom.querySelectorAll("p");
 
     paragraphs.forEach((p, index) => {
-      // Add different classes based on index or any other condition
       p.classList.add(`para-${index + 1}`);
     });
 
@@ -90,7 +84,7 @@ function DynamicPersonalityResult({ personalityType }) {
 
   return (
     <div className="result-personality">
-      <h1 className="personality-title">{content.title.rendered}</h1>
+      <h1 className="personality-title">You are {content.title.rendered}</h1>
       {featuredImageUrl && (
         <img
           className="personality-featured-image"
