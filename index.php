@@ -33,16 +33,12 @@ class MRJQuiz {
     }
 
     function enqueue_frontend_assets() {
-        error_log('Enqueuing frontend assets');
-        error_log('Frontend CSS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.css');
-        error_log('Frontend JS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.js');
-    
         wp_enqueue_script('attentionFrontend', plugin_dir_url(__FILE__) . 'build/frontend.js', array('wp-element'), '1.0', true);
         wp_enqueue_style('attentionFrontendStyles', plugin_dir_url(__FILE__) . 'build/frontend.css', array(), '1.0');
         wp_localize_script('attentionFrontend', 'appData', array(
             'imagesUrl' => plugin_dir_url(__FILE__) . 'images/',
             'nonce' => wp_create_nonce('wp_rest'),
-            'siteUrl' => get_site_url() // Ensure this is passed correctly
+            'siteUrl' => get_site_url()
         ));
     }
 
