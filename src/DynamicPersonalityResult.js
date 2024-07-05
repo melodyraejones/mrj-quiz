@@ -7,14 +7,8 @@ function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    console.log("Received personalityType:", personalityType); // Debug log
-
-    // Sanitize and convert personalityType to slug format
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    console.log("Personality Type Slug:", slug); // Debug log
-
-    const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
-    console.log("API URL:", apiUrl); // Debug log
+    const apiUrl = `/wp-json/wp/v2/personality_type?slug=${slug}&_embed`;
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
@@ -27,8 +21,8 @@ function DynamicPersonalityResult({ personalityType }) {
         return response.json();
       })
       .then((data) => {
-        if (data && data.length > 0) {
-          setContent(data[0]); // Access the first element
+        if (data.length > 0) {
+          setContent(data[0]);
         } else {
           console.error("No data found for personality type:", slug);
         }
@@ -74,7 +68,8 @@ function DynamicPersonalityResult({ personalityType }) {
     return <div>Loading...</div>;
   }
 
-  const featuredImageUrl = content.featured_media_url || "";
+  const featuredImageUrl =
+    content._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
 
   // Function to add classes to paragraphs
   const addClassesToParagraphs = (htmlString) => {
