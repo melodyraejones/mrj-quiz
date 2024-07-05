@@ -20,8 +20,6 @@ const personalityTypes =
       }))
     : [];
 
-console.log("Personality Types:", personalityTypes);
-
 registerBlockType("mrjplugin/quiz", {
   title: "What's Your Wisdom Profile?",
   icon: "smiley",

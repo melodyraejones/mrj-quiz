@@ -45,7 +45,6 @@ function reducer(state, action) {
       const newScores = { ...state.scores };
       if (personalityType in newScores) {
         newScores[personalityType] += 1; // Increment the score for the corresponding personality type
-        console.log(`Incremented score for ${personalityType}:`, newScores);
       }
       const nextIndex =
         state.index + 1 < state.questions.length

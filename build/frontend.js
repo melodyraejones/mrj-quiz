@@ -29,14 +29,9 @@ function DynamicPersonalityResult({
 }) {
   const [content, setContent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log("Received personalityType:", personalityType); // Debug log
-
     // Sanitize and convert personalityType to slug format
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    console.log("Personality Type Slug:", slug); // Debug log
-
     const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
-    console.log("API URL:", apiUrl); // Debug log
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce
     });
@@ -3639,7 +3634,6 @@ function reducer(state, action) {
       };
       if (personalityType in newScores) {
         newScores[personalityType] += 1; // Increment the score for the corresponding personality type
-        console.log(`Incremented score for ${personalityType}:`, newScores);
       }
       const nextIndex = state.index + 1 < state.questions.length ? state.index + 1 : state.index;
       return {

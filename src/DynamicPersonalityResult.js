@@ -7,14 +7,11 @@ function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    console.log("Received personalityType:", personalityType); // Debug log
-
     // Sanitize and convert personalityType to slug format
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
-    console.log("Personality Type Slug:", slug); // Debug log
 
     const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
-    console.log("API URL:", apiUrl); // Debug log
+
     const headers = new Headers({
       "X-WP-Nonce": appData.nonce,
     });
