@@ -11,18 +11,18 @@ if (!defined('ABSPATH')) exit;
 
 class MRJQuiz {
     function __construct() {
-        add_action('init', array($this, 'register_block'));
-        add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
+        add_action('init', array($this, 'adminAssets'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'settings_init'));
+        add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
         add_action('init', array($this, 'create_personality_post_type'));
     }
-
-    function register_block() {
+    
+    function adminAssets() {
         // Register styles and scripts for the editor
         wp_register_style('quizEditCSS', plugin_dir_url(__FILE__) . 'build/index.css');
-        wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'), filemtime(plugin_dir_path(__FILE__) . 'build/index.js'));
+        wp_register_script('newBlockType', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
 
         // Register block type with style and script
         register_block_type('mrjplugin/quiz', array(
@@ -33,12 +33,17 @@ class MRJQuiz {
     }
 
     function enqueue_frontend_assets() {
+        // Debug logging to verify the URLs
+       
+        error_log('Frontend CSS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.css');
+        error_log('Frontend JS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.js');
+
         wp_enqueue_script('attentionFrontend', plugin_dir_url(__FILE__) . 'build/frontend.js', array('wp-element'), '1.0', true);
         wp_enqueue_style('attentionFrontendStyles', plugin_dir_url(__FILE__) . 'build/frontend.css', array(), '1.0');
         wp_localize_script('attentionFrontend', 'appData', array(
             'imagesUrl' => plugin_dir_url(__FILE__) . 'images/',
             'nonce' => wp_create_nonce('wp_rest'),
-            'siteUrl' => get_site_url()
+            'siteUrl' => get_site_url() // Ensure this is passed correctly
         ));
     }
 
@@ -120,6 +125,7 @@ class MRJQuiz {
                 'has_archive' => true,
                 'show_in_rest' => true,
                 'supports'    => array('title', 'editor', 'thumbnail'),
+                'rewrite'     => array('slug' => 'personality_type'), // Ensure the slug is set correctly
             )
         );
     }
