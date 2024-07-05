@@ -1,6 +1,508 @@
-.quiz-start-heading{color:#562973;font-size:4rem;font-weight:300;margin:1.4rem 0 25px;overflow-wrap:break-word;padding:0 25px;text-align:center}.start-screen-img{border:1px solid #dfd3e4;border-radius:10px;box-shadow:2px 2px 10px #444;display:block;height:auto;margin:20px auto;max-width:600px;width:80%}.start-screen-text{font-size:1.6rem;margin-top:2.4rem}.start-screen-questions-length,.start-screen-text{margin-left:auto;margin-right:auto;max-width:800px;text-align:center;width:80%}.start-screen-questions-length{background-color:#6434823d;border-radius:1rem;cursor:pointer;font-size:1.2rem;font-weight:700;margin-top:1.4rem;padding:1rem}.start-screen-btn{background-color:#34016e;background-color:#2f0163;border-radius:1rem;font-size:1.2rem;margin:2.4rem auto 2rem;padding:1.4rem 1.6rem;width:10%}.instructions{margin-bottom:2rem;margin-left:2rem;text-align:left}@media (max-width:64em){.quiz-start-heading{font-size:3.6rem}.start-screen-btn{width:20%}}@media (max-width:60em){.start-screen-img{max-width:400px}.quiz-start-heading{font-size:2.5rem}}@media (max-width:53em){.start-screen-btn{width:25%}.start-screen-img{max-width:350px}.quiz-start-heading{font-size:2rem}}@media (max-width:33.75em){img.start-screen-img{max-width:300px;width:75%}.start-screen-btn{width:35%}}@media (max-width:20em){img.start-screen-img{max-width:200px}.start-screen-text{font-size:1.2rem}.start-screen-btn{width:60%}}
-.btn{background-color:var(--color-dark);border:2px solid var(--color-dark);border-radius:100px;color:inherit;cursor:pointer;display:block;font-family:inherit;font-size:2rem;padding:1.2rem 2.4rem;transition:.3s}.btn-choice{background-color:#6434823d;border-radius:5px;text-align:left;width:50%}.options{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:3.2rem}.answer{transform:translateX(2rem)}@media (max-width:64em){.options{gap:2.2rem}}
-.quiz-question{color:#6a9c07;font-size:3.6rem;font-weight:300;margin:0 0 25px;overflow-wrap:break-word;padding:0;text-align:center}@media (max-width:64em){.quiz-question{font-size:3rem;padding:0 2rem}.btn-choice{width:60%}button.btn{font-size:1.6rem}}@media (max-width:44em){.btn-choice{width:95%}}@media (max-width:33.75em){.btn-choice{width:95%}.quiz-question{font-size:2rem}button.btn{font-size:1.2rem}}
-.progress{color:#000;display:grid;font-size:1.8rem;gap:1.2rem;grid-template-columns:auto auto;justify-content:center;margin-bottom:4rem;margin-top:2rem;text-align:center}progress{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#f0f0f0;border-radius:10px;box-shadow:inset 0 1px 3px rgba(0,0,0,.1);grid-column:1/-1;height:20px;overflow:hidden;width:90%}progress::-webkit-progress-bar{background-color:#f0f0f0;border-radius:10px}progress::-webkit-progress-value{background-image:linear-gradient(135deg,#4caf50,#8bc34a 50%,#cddc39);border-radius:10px;-webkit-transition:width .4s ease;transition:width .4s ease}progress::-moz-progress-bar{background-color:#4caf50;border-radius:10px}@media (max-width:600px){.progress{font-size:1.4rem}}
-.result-personality{background-color:#f9f9f9;border-radius:5px;padding:20px;position:relative;text-align:center}.result-personality .entry-title{color:#333;font-size:2em}.result-personality .post-thumbnail img{border-radius:5px;height:auto;max-width:100%}.result-personality .entry-content{color:#666;font-size:1.2em;line-height:1.6}.personality-featured-image{border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.1);cursor:pointer;height:auto;margin-bottom:2rem;max-width:500px;transition:transform .3s,box-shadow .3s;width:100%}.personality-featured-image:hover{box-shadow:0 8px 16px rgba(0,0,0,.2);transform:scale(1.05)}h1.personality-title{color:tomato;font-size:3.2rem;margin-bottom:1rem}.start-screen-img{height:auto;margin-bottom:2rem;max-width:500px;width:100%}.para-1,.para-2,.para-3{color:#444;font-size:1.2em;line-height:1.8;margin-bottom:2rem;text-align:left}.para-1,.para-2,.para-3{border-radius:5px;padding:10px}.confetti{animation:confetti-fall 2s linear infinite;background-color:tomato;height:10px;left:50%;position:absolute;top:0;width:10px}@keyframes confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0deg)}to{opacity:0;transform:translateY(100vh) rotate(2turn)}}
-.sign-in-list{background-color:#f9f9f9;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,.1);margin:0 auto;max-width:600px;padding:2rem}.learn-more-section{text-align:center;width:100%}.learn-more-title{color:#562973;font-size:2.4rem;margin-bottom:1rem}.result-para{color:#333;font-size:1.2rem;margin-bottom:2rem}form{align-items:center;display:flex;flex-direction:column;margin:0 auto;max-width:400px;width:100%}label{color:#562973;margin-bottom:.5rem;text-align:left}input,label{font-size:1rem;width:100%}input{border:1px solid #ccc;border-radius:5px;margin-bottom:1rem;padding:.5rem}.ctct-inline-form{margin-top:1.5rem}.get-toolkit-btn,.submit-btn{background-color:#562973;border-radius:5px;color:#fff;display:inline-block;font-size:1.2rem;font-weight:600;margin-top:2rem;padding:1rem 2rem;text-decoration:none;transition:background-color .3s}.get-toolkit-btn:hover,.submit-btn:hover{background-color:#6a9c07}.get-toolkit-btn{background-color:#e74c3c;border-radius:5px;box-shadow:0 4px 8px rgba(0,0,0,.2);color:#fff;display:inline-block;font-size:1.4rem;font-weight:700;margin-top:1.5rem;overflow:hidden;padding:1rem 2rem;position:relative;text-align:center;text-decoration:none;transition:background-color .3s ease,transform .3s ease;z-index:1}.get-toolkit-btn:before{background-color:rgba(0,0,0,.7);border-radius:3px;box-shadow:0 4px 8px rgba(0,0,0,.1);color:#fff;content:"Special Offer";font-size:.9rem;font-weight:700;left:-150px;padding:.5rem 1rem;position:absolute;top:50%;transform:translateY(-50%);transition:left .3s ease}.get-toolkit-btn:hover:before{left:0}.get-toolkit-btn:hover{background-color:#c0392b;transform:scale(1.05)}.get-toolkit-btn:active{transform:scale(.95)}@media (max-width:48em){.sign-in-list{padding:1rem}form{padding-left:.5rem;padding-right:.5rem}}@media (max-width:35em){.result-personality{padding:.5rem!important}.full-width-height{width:auto!important}}
+/*!************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/startScreen.css ***!
+  \************************************************************************************************************************************************************************************/
+.quiz-start-heading {
+  text-align: center;
+  font-weight: 300;
+  font-size: 4rem;
+  margin: 0 0 25px;
+  padding: 0 25px;
+  overflow-wrap: break-word;
+  color: #562973;
+  margin-top: 1.4rem;
+}
+
+.start-screen-img {
+  width: 80%; /* Adjusted width for better control */
+  max-width: 600px; /* Maximum width to ensure it doesn't get too large */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  margin: 20px auto; /* Added top and bottom margin */
+  border: 1px solid #dfd3e4;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #444;
+}
+
+.start-screen-text {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 800px;
+}
+.start-screen-questions-length {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 800px;
+  background-color: #6434823d;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.start-screen-btn {
+  font-size: 1.2rem;
+  margin-top: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  padding: 1.4rem 1.6rem;
+  width: 10%;
+  background-color: rgb(52, 1, 110);
+  border-radius: 1rem;
+}
+.start-screen-btn {
+  background-color: rgb(47, 1, 99);
+}
+.instructions {
+  text-align: left;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 64em) {
+  .quiz-start-heading {
+    font-size: 3.6rem;
+  }
+  .start-screen-btn {
+    width: 20%;
+  }
+}
+@media (max-width: 60em) {
+  .start-screen-img {
+    max-width: 400px;
+  }
+  .quiz-start-heading {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 53em) {
+  .start-screen-btn {
+    width: 25%;
+  }
+  .start-screen-img {
+    max-width: 350px;
+  }
+  .quiz-start-heading {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 33.75em) {
+  img.start-screen-img {
+    max-width: 300px;
+    width: 75%;
+  }
+  .start-screen-btn {
+    width: 35%;
+  }
+}
+@media (max-width: 20em) {
+  img.start-screen-img {
+    max-width: 200px;
+  }
+  .start-screen-text {
+    font-size: 1.2rem;
+  }
+  .start-screen-btn {
+    width: 60%;
+  }
+}
+
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/option.css ***!
+  \*******************************************************************************************************************************************************************************/
+.btn {
+  display: block;
+  font-family: inherit;
+  color: inherit;
+  font-size: 2rem;
+  border: 2px solid var(--color-dark);
+  background-color: var(--color-dark);
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: 0.3s;
+}
+.btn-choice {
+  width: 50%;
+  text-align: left;
+  border-radius: 5px;
+  background-color: #6434823d;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3.2rem;
+}
+.answer {
+  transform: translateX(2rem);
+}
+@media (max-width: 64em) {
+  .options {
+    gap: 2.2rem;
+  }
+}
+
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/question.css ***!
+  \*********************************************************************************************************************************************************************************/
+.quiz-question {
+  font-weight: 300;
+  font-size: 3.6rem;
+  padding: 0;
+  margin: 0 0 25px;
+  overflow-wrap: break-word;
+  text-align: center;
+  color: #6a9c07;
+}
+@media (max-width: 64em) {
+  .quiz-question {
+    font-size: 3rem;
+    padding: 0 2rem;
+  }
+  .btn-choice {
+    width: 60%;
+  }
+  button.btn {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 44em) {
+  .btn-choice {
+    width: 95%;
+  }
+}
+@media (max-width: 33.75em) {
+  .btn-choice {
+    width: 95%;
+  }
+  .quiz-question {
+    font-size: 2rem;
+  }
+  button.btn {
+    font-size: 1.2rem;
+  }
+}
+
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/progress.css ***!
+  \*********************************************************************************************************************************************************************************/
+.progress {
+  margin-bottom: 4rem;
+  display: grid;
+  justify-content: center;
+  gap: 1.2rem;
+  grid-template-columns: auto auto;
+  font-size: 1.8rem;
+  color: #000;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 90%; /* Control width here */
+  height: 20px; /* Adjust height to make it thicker */
+  grid-column: 1 / -1;
+  border-radius: 10px;
+  overflow: hidden; /* Ensures the border-radius applies correctly */
+  background-color: #f0f0f0; /* Light background for the progress bar */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0; /* Same as the regular background */
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-image: linear-gradient(
+    135deg,
+    #4caf50 0%,
+    #8bc34a 50%,
+    #cddc39 100%
+  ); /* Green gradient effect */
+  border-radius: 10px;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease; /* Smooth transition for bar width */
+}
+
+progress::-moz-progress-bar {
+  background-color: #4caf50;
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .progress {
+    font-size: 1.4rem;
+  }
+}
+
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/DynamicPersonalityResult.css ***!
+  \**************************************************************************************************************************************************************************************/
+/* personality-type-styles.css */
+.result-personality {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+
+.result-personality .entry-title {
+  font-size: 2em;
+  color: #333;
+}
+
+.result-personality .post-thumbnail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.result-personality .entry-content {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #666;
+}
+
+.personality-featured-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.personality-featured-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h1.personality-title {
+  font-size: 3.2rem;
+  color: #ff6347; /* Tomato color for the title */
+  margin-bottom: 1rem;
+}
+
+.start-screen-img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.para-1,
+.para-2,
+.para-3 {
+  margin-bottom: 2rem;
+  text-align: left;
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #444;
+}
+
+.para-1 {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.para-2 {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.para-3 {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff6347; /* Tomato color */
+  top: 0;
+  left: 50%;
+  animation: confetti-fall 2s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/signInList.css ***!
+  \***********************************************************************************************************************************************************************************/
+.sign-in-list {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learn-more-section {
+  text-align: center;
+  width: 100%;
+}
+
+.learn-more-title {
+  font-size: 2.4rem;
+  color: #562973;
+  margin-bottom: 1rem;
+}
+
+.result-para {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  font-size: 1rem;
+  color: #562973;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+input {
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ctct-inline-form {
+  margin-top: 1.5rem;
+}
+
+.get-toolkit-btn,
+.submit-btn {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #562973;
+  color: #fff;
+  transition: background-color 0.3s;
+  margin-top: 2rem;
+}
+
+.get-toolkit-btn:hover,
+.submit-btn:hover {
+  background-color: #6a9c07;
+}
+
+/* Special styles for the Get Toolkit button */
+.get-toolkit-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #e74c3c; /* Special offer color */
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* Ensure it is on top */
+}
+
+.get-toolkit-btn::before {
+  content: "Special Offer";
+  position: absolute;
+  top: 50%;
+  left: -150px; /* Hide the label initially */
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+}
+
+.get-toolkit-btn:hover::before {
+  left: 0; /* Show the label on hover */
+}
+
+.get-toolkit-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.get-toolkit-btn:active {
+  transform: scale(0.95);
+}
+
+/* Adjust padding for smaller screens */
+@media (max-width: 48em) {
+  .sign-in-list {
+    padding: 1rem;
+  }
+
+  form {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 35em) {
+  .result-personality {
+    padding: 0.5rem !important;
+  }
+  .full-width-height {
+    width: auto !important;
+  }
+}
+
+
+/*# sourceMappingURL=frontend.css.map*/

@@ -34,7 +34,7 @@ class MRJQuiz {
 
     function enqueue_frontend_assets() {
         // Debug logging to verify the URLs
-       
+        error_log('Enqueuing frontend assets');
         error_log('Frontend CSS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.css');
         error_log('Frontend JS URL: ' . plugin_dir_url(__FILE__) . 'build/frontend.js');
 
