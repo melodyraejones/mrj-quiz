@@ -54,7 +54,12 @@ registerBlockType("mrjplugin/quiz", {
 
 function EditComponent({ attributes, setAttributes }) {
   const { questions, personalityTypes } = attributes;
-
+  function removeQuestion(questionIndex) {
+    const newQuestions = questions.filter(
+      (_, index) => index !== questionIndex
+    );
+    setAttributes({ questions: newQuestions });
+  }
   function addQuestion() {
     const newQuestions = [
       ...questions,
@@ -210,6 +215,9 @@ function EditComponent({ attributes, setAttributes }) {
             isSecondary
           >
             Add Another Choice
+          </Button>
+          <Button isDestructive onClick={() => removeQuestion(questionIndex)}>
+            Delete Question
           </Button>
           <hr className="next-question-line" />
         </div>

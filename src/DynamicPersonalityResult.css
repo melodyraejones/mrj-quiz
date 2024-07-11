@@ -44,8 +44,11 @@
 
 h1.personality-title {
   font-size: 3.2rem;
-  color: #ff6347; /* Tomato color for the title */
+  color: #6a9c07;
   margin-bottom: 1rem;
+}
+h1.entry-title {
+  display: none;
 }
 
 .start-screen-img {

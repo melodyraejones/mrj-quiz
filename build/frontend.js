@@ -18,8 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var html_react_parser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! html-react-parser */ "./node_modules/html-react-parser/esm/index.mjs");
 /* harmony import */ var _DynamicPersonalityResult_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DynamicPersonalityResult.css */ "./src/DynamicPersonalityResult.css");
-/* harmony import */ var _components_SignInList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/SignInList */ "./src/components/SignInList.js");
-
 
 
 
@@ -29,7 +27,6 @@ function DynamicPersonalityResult({
 }) {
   const [content, setContent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    // Sanitize and convert personalityType to slug format
     const slug = personalityType.toLowerCase().replace(/ /g, "-");
     const apiUrl = `${appData.siteUrl}/wp-json/wp/v2/personality_type?slug=${slug}`;
     const headers = new Headers({
@@ -51,14 +48,10 @@ function DynamicPersonalityResult({
     }).catch(error => {
       console.error("Error fetching data:", error);
     });
-
-    // Function to get a random color
     const getRandomColor = () => {
       const colors = ["#ff6347", "#ffeb3b", "#8bc34a", "#00bcd4", "#e91e63"];
       return colors[Math.floor(Math.random() * colors.length)];
     };
-
-    // Create confetti effect
     const confettiCount = 30;
     const confettiContainer = document.createElement("div");
     confettiContainer.classList.add("confetti-container");
@@ -70,8 +63,6 @@ function DynamicPersonalityResult({
       confettiContainer.appendChild(confetti);
     }
     document.body.appendChild(confettiContainer);
-
-    // Remove confetti after animation
     setTimeout(() => {
       document.body.removeChild(confettiContainer);
     }, 5000);
@@ -85,13 +76,10 @@ function DynamicPersonalityResult({
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Loading...");
   }
   const featuredImageUrl = content.featured_media_url || "";
-
-  // Function to add classes to paragraphs
   const addClassesToParagraphs = htmlString => {
     const dom = new DOMParser().parseFromString(htmlString, "text/html");
     const paragraphs = dom.querySelectorAll("p");
     paragraphs.forEach((p, index) => {
-      // Add different classes based on index or any other condition
       p.classList.add(`para-${index + 1}`);
     });
     return dom.body.innerHTML;
@@ -101,13 +89,13 @@ function DynamicPersonalityResult({
     className: "result-personality"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     className: "personality-title"
-  }, content.title.rendered), featuredImageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }, "You are ", content.title.rendered), featuredImageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     className: "personality-featured-image",
     src: featuredImageUrl,
     alt: content.title.rendered
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "personality-content start-screen-text"
-  }, (0,html_react_parser__WEBPACK_IMPORTED_MODULE_2__["default"])(modifiedContent)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_SignInList__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }, (0,html_react_parser__WEBPACK_IMPORTED_MODULE_2__["default"])(modifiedContent)));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DynamicPersonalityResult);
 
@@ -320,66 +308,6 @@ function Question({
   }));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Question);
-
-/***/ }),
-
-/***/ "./src/components/SignInList.js":
-/*!**************************************!*\
-  !*** ./src/components/SignInList.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _signInList_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./signInList.css */ "./src/components/signInList.css");
-
-
-
-const SignInList = () => {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "sign-in-list"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "learn-more-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "learn-more-title"
-  }, "Want to learn more?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "result-para"
-  }, "Enter your email address below and my", " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, "Discover Your Intuitive Style Report"), " will be sent directly to your inbox. This report will give you more information on how you can create a stronger connection to your intuition. You will also receive information on upcoming events, blog posts, articles, and offerings."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "email"
-  }, "*Email"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "email",
-    id: "email",
-    name: "email",
-    required: true
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "firstName"
-  }, "*First Name"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    id: "firstName",
-    name: "firstName",
-    required: true
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "lastName"
-  }, "Last Name"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    id: "lastName",
-    name: "lastName"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    type: "submit",
-    className: "submit-btn"
-  }, "Submit")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "ctct-inline-form",
-    "data-form-id": "9d74ea33-1e45-4cee-8de7-2fd103a68ba7"
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignInList);
 
 /***/ }),
 
@@ -2213,19 +2141,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************!*\
   !*** ./src/components/question.css ***!
   \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/components/signInList.css":
-/*!***************************************!*\
-  !*** ./src/components/signInList.css ***!
-  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

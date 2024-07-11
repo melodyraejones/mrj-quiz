@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import parse from "html-react-parser";
 import "./DynamicPersonalityResult.css";
-import SignInList from "./components/SignInList";
 
 function DynamicPersonalityResult({ personalityType }) {
   const [content, setContent] = useState(null);
@@ -95,7 +94,6 @@ function DynamicPersonalityResult({ personalityType }) {
       <div className="personality-content start-screen-text">
         {parse(modifiedContent)}
       </div>
-      <SignInList />
     </div>
   );
 }

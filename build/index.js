@@ -227,6 +227,12 @@ function EditComponent({
     questions,
     personalityTypes
   } = attributes;
+  function removeQuestion(questionIndex) {
+    const newQuestions = questions.filter((_, index) => index !== questionIndex);
+    setAttributes({
+      questions: newQuestions
+    });
+  }
   function addQuestion() {
     const newQuestions = [...questions, {
       question: "",
@@ -357,7 +363,10 @@ function EditComponent({
     className: "choice-btn",
     onClick: () => addChoice(questionIndex),
     isSecondary: true
-  }, "Add Another Choice"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
+  }, "Add Another Choice"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    isDestructive: true,
+    onClick: () => removeQuestion(questionIndex)
+  }, "Delete Question"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
     className: "next-question-line"
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     onClick: addQuestion,

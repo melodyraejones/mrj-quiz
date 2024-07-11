@@ -298,8 +298,11 @@ progress::-moz-progress-bar {
 
 h1.personality-title {
   font-size: 3.2rem;
-  color: #ff6347; /* Tomato color for the title */
+  color: #6a9c07;
   margin-bottom: 1rem;
+}
+h1.entry-title {
+  display: none;
 }
 
 .start-screen-img {
@@ -352,155 +355,6 @@ h1.personality-title {
   100% {
     transform: translateY(100vh) rotate(720deg);
     opacity: 0;
-  }
-}
-
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/components/signInList.css ***!
-  \***********************************************************************************************************************************************************************************/
-.sign-in-list {
-  background-color: #f9f9f9;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.learn-more-section {
-  text-align: center;
-  width: 100%;
-}
-
-.learn-more-title {
-  font-size: 2.4rem;
-  color: #562973;
-  margin-bottom: 1rem;
-}
-
-.result-para {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 2rem;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-label {
-  font-size: 1rem;
-  color: #562973;
-  margin-bottom: 0.5rem;
-  text-align: left;
-  width: 100%;
-}
-
-input {
-  font-size: 1rem;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.ctct-inline-form {
-  margin-top: 1.5rem;
-}
-
-.get-toolkit-btn,
-.submit-btn {
-  display: inline-block;
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  border-radius: 5px;
-  background-color: #562973;
-  color: #fff;
-  transition: background-color 0.3s;
-  margin-top: 2rem;
-}
-
-.get-toolkit-btn:hover,
-.submit-btn:hover {
-  background-color: #6a9c07;
-}
-
-/* Special styles for the Get Toolkit button */
-.get-toolkit-btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 1rem 2rem;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #e74c3c; /* Special offer color */
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-  z-index: 1; /* Ensure it is on top */
-}
-
-.get-toolkit-btn::before {
-  content: "Special Offer";
-  position: absolute;
-  top: 50%;
-  left: -150px; /* Hide the label initially */
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border-radius: 3px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: left 0.3s ease;
-}
-
-.get-toolkit-btn:hover::before {
-  left: 0; /* Show the label on hover */
-}
-
-.get-toolkit-btn:hover {
-  background-color: #c0392b;
-  transform: scale(1.05);
-}
-
-.get-toolkit-btn:active {
-  transform: scale(0.95);
-}
-
-/* Adjust padding for smaller screens */
-@media (max-width: 48em) {
-  .sign-in-list {
-    padding: 1rem;
-  }
-
-  form {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-}
-
-@media (max-width: 35em) {
-  .result-personality {
-    padding: 0.5rem !important;
-  }
-  .full-width-height {
-    width: auto !important;
   }
 }
 
